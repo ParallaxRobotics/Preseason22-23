@@ -1,74 +1,61 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
 
-
-
-
-@TeleOp(name = "DriveTrain")  public class DriveTrain extends LinearOpMode {
-    public float x, y, z, w, pwr;
-    private DcMotor BR;
-    private DcMotor BL;
-    private DcMotor FL;
-    private DcMotor FR;
-    private Servo tailServo;
-    //private Servo FoundationServo;
-
-
+@TeleOp
+public class DriveTrain extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        BR = hardwareMap.dcMotor.get("BR");
-        BL = hardwareMap.dcMotor.get("BL");
-        FL = hardwareMap.dcMotor.get("FL");
-        FR = hardwareMap.dcMotor.get("FR");
-        tailServo = hardwareMap.servo.get("tailServo");
+        // Declare our motors
+        // Make sure your ID's match your configuration
+        DcMotor FL = hardwareMap.dcMotor.get("FL");
+        DcMotor BL = hardwareMap.dcMotor.get("BL");
+        DcMotor FR = hardwareMap.dcMotor.get("FR");
+        DcMotor BR = hardwareMap.dcMotor.get("BR");
 
-
-
-
-        FR.setDirection(DcMotor.Direction.REVERSE);
-        BR.setDirection(DcMotor.Direction.REVERSE);
-
-
-
-
-        FR.setPower(Range.clip(pwr - x + z, -1, 1));
-        BL.setPower(Range.clip(pwr - x - z, -1, 1));
-        FL.setPower(Range.clip(pwr + x - z, -1, 1));
-        BR.setPower(Range.clip(pwr + x + z, -1, 1));
+        // Reverse the right side motors
+        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        BR.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-        while (opModeIsActive()) {
 
-            if (gamepad1.a) {
-                tailServo.setPosition(.85);
+        if (isStopRequested()) return;
+
+        while (opModeIsActive()) {
+            double y = gamepad1.left_stick_y;
+            double x = -gamepad1.left_stick_x;
+            double rx = -0.9 * gamepad1.right_stick_x;
+
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+
+            double frontLeftPower = 0;
+            double backLeftPower = 0;
+            double frontRightPower = 0;
+            double backRightPower = 0;
+            double DriveSen = 1.0;
+
+            if (denominator == 0) {
+                FL.setPower(0);
+                FR.setPower(0);
+                BL.setPower(0);
+                BR.setPower(0);
             }
 
+            else {
 
-            float forwardBackAxis = gamepad1.left_stick_y; //moving forward
-            float leftRightAxis = -gamepad1.left_stick_x; // strafing
-            float spinAxis = gamepad1.right_stick_x; // turning
+                frontLeftPower = (y + x + rx) / denominator;
+                backLeftPower = (y - x + rx) / denominator;
+                frontRightPower = (y - x - rx) / denominator;
+                backRightPower = -(y + x - rx) / denominator;
 
-
-            //math tings
-            float FRpower = forwardBackAxis + leftRightAxis + spinAxis;
-            float FLpower = forwardBackAxis + leftRightAxis - spinAxis;
-            float BRpower = forwardBackAxis - leftRightAxis + spinAxis;
-            float BLpower = forwardBackAxis - leftRightAxis - spinAxis;
-
-
-            FR.setPower(-FRpower);
-            FL.setPower(-FLpower);
-            BR.setPower(-BRpower);
-            BL.setPower(-BLpower);
-
-
-
-        }}}
+                FL.setPower(DriveSen * frontLeftPower);
+                FR.setPower(DriveSen * frontRightPower);
+                BL.setPower(DriveSen * backLeftPower);
+                BR.setPower(DriveSen * backRightPower);
+            }
+        }
+    }
+}
