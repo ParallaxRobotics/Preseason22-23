@@ -16,9 +16,8 @@ public class Tail {
     public void Update(Gamepad gamepad1, Gamepad gamepad2) {
 
         // A - Tail Moves
-        if (gamepad2.b) {
+        if (gamepad1.a) {
             robot.tailServo.setPosition(0.3);
-
 
         } else {
             robot.tailServo.setPosition(0.8);

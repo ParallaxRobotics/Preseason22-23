@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.TeleOp.DriveTrain;
 import org.firstinspires.ftc.teamcode.TeleOp.Tail;
 
@@ -31,10 +29,10 @@ import org.firstinspires.ftc.teamcode.TeleOp.Tail;
 public class HardwareRobot {
 
     // Public opMode Members
-    public DcMotor frontRight;
-    public DcMotor frontLeft;
-    public DcMotor backRight;
-    public DcMotor backLeft;
+    public DcMotor FR;
+    public DcMotor FL;
+    public DcMotor BR;
+    public DcMotor BL;
     public Servo tailServo;
 
     // Referencing other classes
@@ -61,22 +59,22 @@ public class HardwareRobot {
 
 
         // Define and Initialize Motors
-        frontRight = hwMap.get(DcMotor.class, "frontRight");
-        frontLeft = hwMap.get(DcMotor.class, "frontLeft");
-        backRight = hwMap.get(DcMotor.class, "backRight");
-        backLeft = hwMap.get(DcMotor.class, "backLeft");
+        FR = hwMap.get(DcMotor.class, "FR");
+        FL = hwMap.get(DcMotor.class, "FL");
+        BR = hwMap.get(DcMotor.class, "BR");
+        BL = hwMap.get(DcMotor.class, "BL");
 
         // Reverse Directions
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+        FL.setDirection(DcMotorSimple.Direction.REVERSE);
+        BL.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         // Run Using Encoders
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and Initialize Servos
         tailServo = hwMap.get(Servo.class, "tailServo");

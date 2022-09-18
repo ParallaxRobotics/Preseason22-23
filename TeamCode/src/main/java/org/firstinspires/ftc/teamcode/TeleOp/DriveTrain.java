@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.HardwareRobot;
 
-import java.sql.Driver;
 
 public class DriveTrain {
 
@@ -37,10 +37,10 @@ public class DriveTrain {
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 
         if (denominator == 0) {
-            robot.frontLeft.setPower(0);
-            robot.frontRight.setPower(0);
-            robot.backLeft.setPower(0);
-            robot.backRight.setPower(0);
+            robot.FL.setPower(0);
+            robot.FR.setPower(0);
+            robot.BL.setPower(0);
+            robot.BR.setPower(0);
         }
 
         else {
@@ -49,12 +49,10 @@ public class DriveTrain {
             double frontRightPower = (y - x + rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
 
-            robot.frontLeft.setPower(DriveSen * frontLeftPower);
-            robot.frontRight.setPower(DriveSen * frontRightPower);
-            robot.backLeft.setPower(DriveSen * backLeftPower);
-            robot.backRight.setPower(DriveSen * backRightPower);
+            robot.FL.setPower(DriveSen * frontLeftPower);
+            robot.FR.setPower(DriveSen * frontRightPower);
+            robot.BL.setPower(DriveSen * backLeftPower);
+            robot.BR.setPower(DriveSen * backRightPower);
         }
-
-
     }
 }
