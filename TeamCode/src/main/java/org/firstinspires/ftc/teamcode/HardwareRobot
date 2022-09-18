@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.TeleOp.DriveTrain;
+import org.firstinspires.ftc.teamcode.TeleOp.Tail;
 
 
 /**
@@ -38,7 +39,8 @@ public class HardwareRobot {
 
     // Referencing other classes
     DriveTrain DriveTrain;
-    
+    Tail Tail;
+
 
 
     // Local opMode Members
@@ -75,6 +77,9 @@ public class HardwareRobot {
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        // Define and Initialize Servos
+        tailServo = hwMap.get(Servo.class, "tailServo");
 
 
 

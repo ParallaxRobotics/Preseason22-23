@@ -1,1 +1,29 @@
+package org.firstinspires.ftc.teamcode.TeleOp;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+
+import org.firstinspires.ftc.teamcode.HardwareRobot;
+
+public class Tail {
+
+    HardwareRobot robot;
+
+    public Tail(HardwareRobot r) {
+
+        robot = r;
+    }
+
+    public void Update(Gamepad gamepad1, Gamepad gamepad2) {
+
+        // A - Tail Moves
+        if (gamepad2.b) {
+            robot.tailServo.setPosition(0.3);
+
+
+        } else {
+            robot.tailServo.setPosition(0.8);
+        }
+
+    }
+
+}
