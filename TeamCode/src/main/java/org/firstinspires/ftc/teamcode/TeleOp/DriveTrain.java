@@ -4,17 +4,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class DriveTrain extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
+
         // Declare our motors
-        // Make sure your ID's match your configuration
-        DcMotor FL = hardwareMap.dcMotor.get("FL");
-        DcMotor BL = hardwareMap.dcMotor.get("BL");
-        DcMotor FR = hardwareMap.dcMotor.get("FR");
-        DcMotor BR = hardwareMap.dcMotor.get("BR");
+        DcMotor FL = hardwareMap.dcMotor.get("FL");   // Port:
+        DcMotor BL = hardwareMap.dcMotor.get("BL");   // Port:
+        DcMotor FR = hardwareMap.dcMotor.get("FR");   // Port:
+        DcMotor BR = hardwareMap.dcMotor.get("BR");   // Port:
+        Servo tailServo = hardwareMap.servo.get("tailServo");   // Port:
 
         // Reverse the right side motors
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -42,9 +44,8 @@ public class DriveTrain extends LinearOpMode {
                 FR.setPower(0);
                 BL.setPower(0);
                 BR.setPower(0);
-            }
 
-            else {
+            } else {
 
                 frontLeftPower = (y + x + rx) / denominator;
                 backLeftPower = (y - x + rx) / denominator;
@@ -56,6 +57,13 @@ public class DriveTrain extends LinearOpMode {
                 BL.setPower(DriveSen * backLeftPower);
                 BR.setPower(DriveSen * backRightPower);
             }
-        }
+
+            if (gamepad1.a) {
+                tailServo.setPosition(0.5);
+
+            } else {
+                tailServo.setPosition(0.2);
+            }
+        }   
     }
 }
