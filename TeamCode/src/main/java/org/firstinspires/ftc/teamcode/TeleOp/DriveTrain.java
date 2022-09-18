@@ -64,6 +64,6 @@ public class DriveTrain extends LinearOpMode {
             } else {
                 tailServo.setPosition(0.2);
             }
-        }   
+        }
     }
 }
