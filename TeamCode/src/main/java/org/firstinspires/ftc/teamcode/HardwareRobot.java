@@ -65,16 +65,22 @@ public class HardwareRobot {
         BL = hwMap.get(DcMotor.class, "BL");
 
         // Reverse Directions
-        FR.setDirection(DcMotorSimple.Direction.REVERSE);
-        FL.setDirection(DcMotorSimple.Direction.REVERSE);
-        BL.setDirection(DcMotorSimple.Direction.REVERSE);
+//        FL.setDirection(DcMotorSimple.Direction.REVERSE);
+//        BR.setDirection(DcMotorSimple.Direction.REVERSE);
+//        FR.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
 
         // Run Using Encoders
-        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Define and Initialize Servos
         tailServo = hwMap.get(Servo.class, "tailServo");

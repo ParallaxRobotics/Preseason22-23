@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.HardwareRobot;
 
@@ -17,12 +18,10 @@ public class Tail {
 
         // A - Tail Moves
         if (gamepad1.a) {
-            robot.tailServo.setPosition(0.3);
+            robot.tailServo.setPosition(0.1 );
 
         } else {
-            robot.tailServo.setPosition(0.8);
+            robot.tailServo.setPosition(0.0);
         }
-
     }
-
 }

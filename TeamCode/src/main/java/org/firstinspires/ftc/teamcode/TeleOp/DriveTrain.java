@@ -30,9 +30,9 @@ public class DriveTrain {
 
     public void Update(Gamepad gamepad1, Gamepad gamepad2) {
 
-        double y = gamepad1.left_stick_x;
-        double x = -gamepad1.left_stick_y;
-        double rx = 0.7 * gamepad1.right_stick_x;
+        double y = -gamepad1.left_stick_x;
+        double x = gamepad1.left_stick_y;
+        double rx = -0.7 * gamepad1.right_stick_x;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 
