@@ -10,7 +10,7 @@ public class DriveTrain {
 
     HardwareRobot robot;
     public ElapsedTime timer;
-    double DriveSen = 0.6;
+    double DriveSen = 0.5;
 
     public  enum DriveState {
         START,
@@ -32,7 +32,7 @@ public class DriveTrain {
 
         double y = -gamepad1.left_stick_x;
         double x = gamepad1.left_stick_y;
-        double rx = -0.7 * gamepad1.right_stick_x;
+        double rx = -0.6 * gamepad1.right_stick_x;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 
